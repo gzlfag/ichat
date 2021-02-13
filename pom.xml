@@ -20,6 +20,7 @@
 	<modules>
 		<module>ichat-domain</module>
 		<module>ichat-service</module>
+		<module>ichat-front</module>
 	</modules>
 
 	<dependencyManagement>
