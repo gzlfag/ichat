@@ -1,6 +1,8 @@
 package org.ichat.service.serviceImpl;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.ichat.domain.repository.UserRepository;
 import org.ichat.service.bo.UserBo;
@@ -17,7 +19,13 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public UUID createUser(UserBo bo) {
+		bo.setId(UUID.randomUUID());
 		return userRepository.save(UserConvertor.trans(bo)).getKey().getId();
+	}
+
+	@Override
+	public List<UserBo> getUserByName(String name) {
+		return userRepository.findByKeyName(name).stream().map(UserConvertor::trans).collect(Collectors.toList());
 	}
 
 }
