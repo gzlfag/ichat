@@ -9,10 +9,14 @@ import org.springframework.lang.NonNull;
 
 public class UserVBConvertor {
 
+	private UserVBConvertor() {
+		throw new IllegalStateException("Utility class");
+	}
+
 	public static UserBo trans(@NonNull UserVo userVo) {
 		UserBo userBo = UserBo.builder().build();
 
-		BeanUtils.copyProperties(userVo, userBo, new String[] { "id" });
+		BeanUtils.copyProperties(userVo, userBo, "id");
 		userBo.setId(UUID.fromString(userVo.getId()));
 
 		return userBo;
@@ -21,9 +25,9 @@ public class UserVBConvertor {
 	public static UserVo trans(@NonNull UserBo userBo) {
 		UserVo userVo = UserVo.builder().build();
 
-		BeanUtils.copyProperties(userBo, userVo, new String[] { "id" });
+		BeanUtils.copyProperties(userBo, userVo, "id");
 		userVo.setId(userBo.getId().toString());
-		
+
 		return userVo;
 	}
 }
